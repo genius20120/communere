@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { UserRegistrationInterface } from "../schema/user.interface";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import config from "../config/config";
 
 const Schema = mongoose.Schema;

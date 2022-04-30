@@ -4,7 +4,7 @@ import { HttpException } from "../errorHandling/httpException";
 import * as jwt from "jsonwebtoken";
 import config from "../config/config";
 import * as _ from "lodash";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { User } from "../model/user.model";
 import { UserRegistrationInterface } from "../schema/user.interface";
 

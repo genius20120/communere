@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -16,6 +16,9 @@ const port: string | number = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 connectMongo();
+app.get("/", (request: Request, response: Response, next: NextFunction) => {
+  return response.send("root page");
+});
 app.use("/toDo", authenticateUser);
 app.use("/toDo", toDoRouter);
 app.use("/user", userRouter);
