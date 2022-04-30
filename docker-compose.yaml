@@ -1,0 +1,34 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: communere
+      MONGO_INITDB_ROOT_PASSWORD: communere
+    ports:
+      - 27017:27017
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: "always"
+    depends_on:
+      - mongo
+    environment:
+      - PORT
+      - MONGO_USER
+      - MONGO_PASS
+      - MONGO_HOST=mongo
+      - MONGO_PORT
+    ports:
+      - "$PORT:$PORT"
+  web:
+    build: ./nginx
+    depends_on:
+      - app
+    container_name: reverse
+    hostname: localhost
+    ports:
+      - "8080:80"
+    links:
+      - app:app
